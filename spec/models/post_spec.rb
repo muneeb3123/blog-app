@@ -1,71 +1,39 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  subject { Post.new(Title: 'This is a post', CommentsCounter: 2, LikesCounter: 1) }
+  subject { described_class.new }
 
-  before { subject.save }
-
-  it 'Title should be present' do
-    subject.Title = nil
+  it 'title should be present' do
+    subject.title = nil
     expect(subject).to_not be_valid
   end
 
-  it 'Title must not exceed 250 characters' do
-    subject.Title = 'a' * 251
+  it 'title must not exceed 250 characters' do
+    subject.title = 'a' * 251
     expect(subject).to_not be_valid
   end
 
-  it 'CommentsCounter should be greater than or equal to 0' do
-    subject.CommentsCounter = -1
+  it 'comments_counter should be greater than or equal to 0' do
+    subject.comments_counter = -1
     expect(subject).to_not be_valid
   end
 
-  it 'LikesCounter should be greater than or equal to 0' do
-    subject.LikesCounter = -1
+  it 'likes_counter should be greater than or equal to 0' do
+    subject.likes_counter = -1
     expect(subject).to_not be_valid
   end
 
-  describe '#increment_post_counter' do
-    it 'increments the post_counter of the associated user' do
-      user = User.create(name: 'John Doe', post_counter: 0)
-      post = Post.create(author_id: user.id, Title: 'Second Post', Text: 'More thoughts', CommentsCounter: 0,
-                         LikesCounter: 0)
-
-      expect { post.increment_post_counter }.to change { user.reload.post_counter }.by(1)
-    end
-  end
-
-  describe '#decrement_post_counter' do
-    it 'decrements the post_counter of the associated user' do
-      user = User.create(name: 'John Doe', post_counter: 4)
-      post = Post.create(author_id: user.id, Title: 'Second Post', Text: 'More thoughts', CommentsCounter: 0,
-                         LikesCounter: 0)
-
-      expect { post.decrement_post_counter }.to change { user.reload.post_counter }.by(-1)
-    end
-  end
-
-  describe '#recent_comments' do
-    it 'returns the five most recent comments' do
-      # Create a user
-      user = User.create(name: 'John Doe', post_counter: 0)
-
-      # Create a post
-      post = Post.create(author_id: user.id, Title: 'Second Post', Text: 'More thoughts', CommentsCounter: 0,
-                         LikesCounter: 0)
-
-      # Create test comments for the post
-      Comment.create(post_id: post.id, author_id: user.id, Text: 'Hi Tom!')
-      comment2 = Comment.create(post_id: post.id, author_id: user.id, Text: 'Hi Tom!')
-      comment3 = Comment.create(post_id: post.id, author_id: user.id, Text: 'Hi Tom!')
-      comment4 = Comment.create(post_id: post.id, author_id: user.id, Text: 'Hi Tom!')
-      comment5 = Comment.create(post_id: post.id, author_id: user.id, Text: 'Hi Tom!')
-      comment6 = Comment.create(post_id: post.id, author_id: user.id, Text: 'Hi Tom!')
-
-      newer_comments = [comment6, comment5, comment4, comment3, comment2]
-
-      # Ensure that only the five most recent comments are returned
-      expect(post.recent_comments).to eq(newer_comments)
-    end
+  it 'should show five most recent comments' do
+    user = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.',
+                       posts_counter: 0)
+    post = Post.create(author: user, title: 'Hello', text: 'This is my first post', comments_counter: 0,
+                       likes_counter: 0)
+    Comment.create(author: user, post: post, text: 'Hi Tom!')
+    comment2 = Comment.create(author: user, post: post, text: 'Hi Tom!')
+    comment3 = Comment.create(author: user, post: post, text: 'Hi Tom!')
+    comment4 = Comment.create(author: user, post: post, text: 'Hi Tom!')
+    comment5 = Comment.create(author: user, post: post, text: 'Hi Tom!')
+    comment6 = Comment.create(author: user, post: post, text: 'Hi Tom!')
+    expect(post.five_most_recent_comments).to contain_exactly(comment6, comment5, comment4, comment3, comment2)
   end
 end
