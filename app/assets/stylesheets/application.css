@@ -1,15 +1,89 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+main {
+  margin: 5% 0;
+}
+
+.single-user {
+  display: flex;
+  gap: 5%;
+  width: 80%;
+  margin: 15px auto;
+}
+
+.user-image {
+  border: 1px solid black;
+  width: 10%;
+}
+
+.user-information {
+  border: 1px solid black;
+  width: 100%;
+  height: 95px;
+  padding: 20px;
+}
+
+.count {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.user-name {
+  font-size: 2rem;
+}
+
+.user-bio {
+  border: 1px solid black;
+  width: 78%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.bio {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.user-post {
+  border: 1px solid black;
+  width: 78%;
+  margin: 15px auto;
+  padding: 5px 20px;
+}
+
+.post {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.see-all {
+  display: flex;
+  justify-content: center;
+}
+
+.all {
+  padding: 10px 30px;
+}
+
+.posts-comment {
+  border: 1px solid black;
+  width: 78%;
+  margin: 0 auto;
+  padding: 5px 20px;
+}
+
+.post-header {
+  border: 1px solid black;
+  width: 78%;
+  margin: 15px auto;
+  padding: 5px 20px;
+}
+
+.post-by-author {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-author {
+  font-size: 1.5rem;
+}
