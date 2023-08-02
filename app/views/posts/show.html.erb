@@ -1,16 +1,18 @@
 <main>
     <div class="single-post-container">
         <div class="post-header">
+            <div class="post-by-author">
             <p class="post-author">Post #<%= @post.id%> by <%= @user.name%></p>
             <span class="comments-likes-counter"><p class="counter">Comments: <%=@post.comments_counter%>, Likes: <%= @post.likes_counter%></p></span>
-        </div>
+            </div>
         <div class="post-paragraph">
             <%=@post.text%>
+            </div>
+            </div>
             <div class="posts-comment">
                     <% @post.comments.each do |comment| %>
                         <p class="comments"><%= comment.author.name %> : <%= comment.text %></p>
                     <% end %>
                 </div>
-        </div>
     </div>
 </main>
