@@ -1,0 +1,18 @@
+<main>
+<h1 class="form-header">Add new posts</h1>
+<div class="form">
+<%= form_with(model: @post, url: user_posts_path(@user)) do |form| %>
+<div class="form-title">
+<%= form.label :title%>
+<%= form.text_field :title, required: true %>
+</div>
+<div class="form_text">
+<%= form.label :text%>
+<%= form.text_area :text, required: true%>
+</div>
+<div class="submit-button">
+<%= form.submit 'create post'%>
+</div>
+<%end%>
+</div>
+</main>

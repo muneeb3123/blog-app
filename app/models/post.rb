@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   has_many :comments
 
   after_save :update_user_posts_counter
+  before_validation :set_default_counters
 
   def five_most_recent_comments
     comments.order(created_at: :desc).limit(5)
@@ -17,5 +18,9 @@ class Post < ApplicationRecord
 
   def update_user_posts_counter
     author.update(posts_counter: author.posts.count)
+  end
+  def set_default_counters
+    self.comments_counter ||= 0
+    self.likes_counter ||= 0
   end
 end
