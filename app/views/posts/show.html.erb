@@ -3,16 +3,25 @@
         <div class="post-header">
             <div class="post-by-author">
             <p class="post-author">Post #<%= @post.id%> by <%= @user.name%></p>
-            <span class="comments-likes-counter"><p class="counter">Comments: <%=@post.comments_counter%>, Likes: <%= @post.likes_counter%></p></span>
+            <span class="comments-likes-counter">
+                <p class="counter">Comments: <%=@post.comments_counter%>, Likes: <%= @post.likes_counter%></p></span>
             </div>
         <div class="post-paragraph">
             <%=@post.text%>
             </div>
             </div>
+             <% if @post.comments.any? %>
             <div class="posts-comment">
                     <% @post.comments.each do |comment| %>
                         <p class="comments"><%= comment.author.name %> : <%= comment.text %></p>
                     <% end %>
                 </div>
+                <% end%>
+                <div class="add-like-comment">
+                 <%= link_to 'Add a comment', new_user_post_comment_path(@post.author.id, @post.id), class: "btn" %>
+                <%= form_with(url: user_post_likes_path(@post.author, @post)) do |form| %>
+                <%= form.submit 'Like' %>
+                <% end %>
+            </div>
     </div>
 </main>

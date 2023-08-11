@@ -20,6 +20,7 @@
                         <span class="posts-count"><p class="count">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></p></span>
                     </div>
                 </div>
+                <% if post.comments.any? %>
                 <div class="posts-comment">
                     <% post.comments.each do |comment| %>
                         <p class="comments"><%= comment.author.name %> : <%= comment.text %></p>
@@ -27,5 +28,6 @@
                 </div>
             <% end %>
         </div>
+        <% end %>
     </div>
 </main>

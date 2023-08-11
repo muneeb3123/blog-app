@@ -87,3 +87,10 @@ main {
 .post-author {
   font-size: 1.5rem;
 }
+
+.add-like-comment {
+  width: 80%;
+  margin: 10px auto;
+  display: flex;
+  gap: 40px;
+}
