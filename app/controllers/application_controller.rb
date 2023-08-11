@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-    private
+  private
 
-    def current_user
-      @current_user ||= User.first
-    end
+  def current_user
+    @current_user ||= User.first
+  end
 end
