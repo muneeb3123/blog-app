@@ -22,11 +22,14 @@
                 </div>
                 <% if post.comments.any? %>
                 <div class="posts-comment">
-                    <% post.comments.each do |comment| %>
+                    <% post.five_most_recent_comments.each do |comment| %>
                         <p class="comments"><%= comment.author.name %> : <%= comment.text %></p>
                     <% end %>
                 </div>
             <% end %>
+        </div>
+        <div class="link_to_single_post">
+        <%= link_to 'see more', user_post_path(@user, post), class: 'link' %>
         </div>
         <% end %>
     </div>

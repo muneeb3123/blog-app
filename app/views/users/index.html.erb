@@ -10,8 +10,10 @@
                 <h2 class="user-name"><%= user.name%></h2>
                 <span class="post-counter"><p class="count">Number of posts: <%= user.posts.count %></p></span>
             </div>
+            <div class="link_to_posts">
+        <%= link_to 'see all posts', user_posts_path(user), class: 'link' %>
         </div>
-        
+        </div>
     <% end %>
      </div>
 </main>
