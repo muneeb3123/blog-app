@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'post show', type: :system do
+RSpec.describe 'post index', type: :system do
   let!(:user) do
     User.create(
       name: 'Muneeb Rehman',
@@ -60,7 +60,6 @@ RSpec.describe 'post show', type: :system do
     visit user_posts_path(user)
     post = Post.second
     click_link post.title
-    sleep(10)
     expect(page).to have_current_path(user_post_path(user, post))
   end
 end
