@@ -20,6 +20,15 @@ RSpec.describe 'User show', type: :system do
     )
   end
 
+  let!(:post2) do
+    Post.create(
+      author: user,
+      title: 'post#2',
+      text: 'This is my second post!',
+      comments_counter: 0,
+      likes_counter: 0
+      )
+  end
 
   it 'show user informations' do
     visit user_path(user)
@@ -31,7 +40,9 @@ RSpec.describe 'User show', type: :system do
 
   it 'displays posts information' do
     visit user_path(user)
-   
+    expect(page).to have_content(post2.title)
+    expect(page).to have_content(post2.text)
+  
     expect(page).to have_content(post1.title)
     expect(page).to have_content(post1.text)
 
