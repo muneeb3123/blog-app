@@ -59,6 +59,7 @@ RSpec.configure do |config|
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
+  # Capybara.default_driver = :selenium_chrome
   # config.filter_gems_from_backtrace("gem name")
+  Webdrivers::Chromedriver.required_version = '114.0.5735.90'
 end
-# Capybara.default_driver = :selenium_chrome
