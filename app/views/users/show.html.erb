@@ -16,7 +16,8 @@
             </p>
         </div>
         <div class="user-all-posts">
-            <% @user.posts.each_with_index do |post,index|%>
+            <% @user.three_most_recent_posts.each_with_index do |post,index|%>
+            <a href="<%= user_post_path(@user, post)%>" class="user-link">
             <div class="user-post">
                 <h4 class="post">Post #<%= index+1%></h4>
                 <div class="post-content">
@@ -26,10 +27,11 @@
                     <span class="posts-count"><p class="count">Comments: <%=post.comments_counter%>, Likes: <%=post.likes_counter%></p></span>
                 </div>
             </div>
+            </a>
             <%end%>
         </div>
         <div class="see-all">
-            <button class="all">See all posts</button>
+            <button id="all" class="all"><%= link_to 'see all posts', user_posts_path(@user) %></button>
         </div>
     </div>
 </main>
