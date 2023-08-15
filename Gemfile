@@ -78,4 +78,3 @@ gem 'bullet', group: 'development'
 gem 'rack-cors'
 gem 'rubocop', '>= 1.0', '< 2.0'
 gem 'will_paginate'
-

@@ -29,8 +29,6 @@ RSpec.describe 'post show', type: :system do
       text: 'hy larry!'
     )
   end
- 
-
 
   it 'displays the user information' do
     visit user_posts_path(user)
