@@ -117,3 +117,8 @@ main {
   height: 100%;
   object-fit: cover;
 }
+
+.create_post {
+  width: 80%;
+  margin: 20px auto;
+}
