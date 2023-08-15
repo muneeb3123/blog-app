@@ -10,42 +10,59 @@ RSpec.describe 'post show', type: :system do
     )
   end
 
-  let!(:post1) do
-    Post.create(
-      author: user,
-      title: 'post#1',
-      text: 'This is my first post!',
-      comments_counter: 0,
-      likes_counter: 0
-    )
+  before do
+    15.times do |i|
+      Post.create(
+        author: user,
+        title: "post##{i + 1}",
+        text: "this is my #{i + 1} post!",
+        comments_counter: 0,
+        likes_counter: 0
+      )
+    end
   end
-  let!(:post2) do
-    Post.create(
-      author: user,
-      title: 'post#2',
-      text: 'This is my second post!',
-      comments_counter: 0,
-      likes_counter: 0
-    )
-  end
+
   let!(:comment) do
     Comment.create(
       author: user,
-      post: post2,
+      post: Post.first,
       text: 'hy larry!'
     )
   end
+ 
 
-  it 'displays the usernam' do
+
+  it 'displays the user information' do
     visit user_posts_path(user)
-    sleep(10)
     expect(page).to have_content('Muneeb Rehman')
     expect(page).to have_css("img[src='#{user.photo}']")
-    expect(page).to have_content('Number of posts: 2')
-    expect(page).to have_content(post1.title)
-    expect(page).to have_content(post1.text)
-    expect(page).to have_content(post2.title)
-    expect(page).to have_content(post2.text)
+    expect(page).to have_content('Number of posts: 15')
+  end
+  it 'Check the first page of posts also see how many comments and likes' do
+    visit user_posts_path(user)
+    expect(page).to have_content('post#2')
+    expect(page).to have_content('this is my 2 post!')
+    expect(page).to have_content('Comments: 0, Likes: 0')
+    expect(page).to have_content('post#3')
+    expect(page).to have_content('this is my 3 post!')
+    expect(page).to have_content('Comments: 0, Likes: 0')
+  end
+
+  it 'Check for pagination and first comment on post 1' do
+    visit user_posts_path(user)
+    click_link '4'
+    expect(page).to have_content('post#14')
+    expect(page).to have_content('this is my 14 post!')
+    expect(page).to have_content('post#15')
+    expect(page).to have_content('this is my 15 post!')
     expect(page).to have_content(comment.text)
+  end
+
+  it 'When click on a post, it redirected to that post show page.' do
+    visit user_posts_path(user)
+    post = Post.second
+    click_link post.title
+    sleep(10)
+    expect(page).to have_current_path(user_post_path(user, post))
   end
 end
