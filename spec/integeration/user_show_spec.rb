@@ -27,7 +27,7 @@ RSpec.describe 'User show', type: :system do
       text: 'This is my second post!',
       comments_counter: 0,
       likes_counter: 0
-      )
+    )
   end
 
   it 'show user informations' do
@@ -42,7 +42,7 @@ RSpec.describe 'User show', type: :system do
     visit user_path(user)
     expect(page).to have_content(post2.title)
     expect(page).to have_content(post2.text)
-  
+
     expect(page).to have_content(post1.title)
     expect(page).to have_content(post1.text)
 
@@ -51,8 +51,7 @@ RSpec.describe 'User show', type: :system do
     expect(page).to have_current_path(user_posts_path(user))
 
     visit user_path(user)
-    click_link "#{post1.title}"
+    click_link post1.title.to_s
     expect(page).to have_current_path(user_post_path(user, post1))
-    
   end
 end

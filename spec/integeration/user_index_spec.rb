@@ -12,10 +12,9 @@ RSpec.describe 'User Index', type: :system do
 
   let!(:user2) do
     User.create(name: 'Larry',
-    photo: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    bio: 'Student - Developer',
-    posts_counter: 0
-    )  
+                photo: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                bio: 'Student - Developer',
+                posts_counter: 0)
   end
 
   it 'displays the username and profile picture of all other users and display posts counter' do
@@ -27,7 +26,6 @@ RSpec.describe 'User Index', type: :system do
     expect(page).to have_content('Larry')
     expect(page).to have_css("img[src='#{user2.photo}']")
     expect(page).to have_content('Number of posts: 0')
-
   end
 
   it 'redirects to the user show page when clicking on a user' do
