@@ -30,28 +30,48 @@ RSpec.describe 'User show', type: :system do
     )
   end
 
-  it 'show user informations' do
+  it 'should display user profile picture' do
     visit user_path(user)
     expect(page).to have_css("img[src='#{user.photo}']")
+  end
+
+  it 'the user username.' do
+    visit user_path(user)
     expect(page).to have_content(user.name)
+  end
+
+  it 'should display number of posts' do
+    visit user_path(user)
     expect(page).to have_content('Number of posts: 2')
+  end
+
+  it 'should display user bio.' do
+    visit user_path(user)
     expect(page).to have_content(user.bio)
   end
 
-  it 'displays posts information' do
+  it 'displays post 1 information' do
     visit user_path(user)
     expect(page).to have_content(post2.title)
     expect(page).to have_content(post2.text)
+  end
 
+  it 'displays post 1 information' do
+    visit user_path(user)
     expect(page).to have_content(post1.title)
     expect(page).to have_content(post1.text)
+  end
 
-    expect(page).to have_content('see all posts')
-    click_link 'see all posts'
-    expect(page).to have_current_path(user_posts_path(user))
-
+  it 'redirects to that post show page.' do
     visit user_path(user)
     click_link post1.title.to_s
     expect(page).to have_current_path(user_post_path(user, post1))
+  end
+
+  it 'should redirect to the user posts index page when click on a see all posts' do
+    visit user_path(user)
+    expect(page).to have_content('see all posts')
+    click_link 'see all posts'
+    expect(page).to have_current_path(user_posts_path(user))
   end
 end
