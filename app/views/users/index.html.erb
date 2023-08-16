@@ -1,17 +1,19 @@
 <main>
-    <div class="users-container" >
-    <% @users.each do |user| %>
-    
-        <div class="single-user">
-            <div class="user-image">
-                <img src="<%= user.photo%>" alt="profile" class="user-profile">
-            </div>
-            <div class="user-information">
-                <h2 class="user-name"><%= user.name%></h2>
-                <span class="post-counter"><p class="count">Number of posts: <%= user.posts.count %></p></span>
-            </div>
-        </div>
-        
-    <% end %>
-     </div>
+    <div class="users-container">
+        <% @users.each do |user| %>
+            <a href="<%= user_path(user) %>" class="user-link">
+                <div class="single-user">
+                    <div class="user-image">
+                        <img class="image" src="<%= user.photo %>">
+                    </div>
+                    <div class="user-information">
+                        <h2 class="user-name"><%= user.name %></h2>
+                        <span class="post-counter">
+                            <p class="count">Number of posts: <%= user.posts.count %></p>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        <% end %>
+    </div>
 </main>

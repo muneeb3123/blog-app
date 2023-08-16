@@ -10,9 +10,10 @@
             </div>
         </div>
         <div class="user-all-posts">
-            <% @posts.each_with_index do |post, index| %>
+            <% @posts.each do |post| %>
+            <a href="<%= user_post_path(@user, post)%>" class="user-link">
                 <div class="user-post">
-                    <h4 class="post">Post #<%= index+1 %></h4>
+                    <h4 class="post"><%= post.title %></h4>
                     <div class="post-content">
                         <p class="post-paragraph">
                             <%= post.text %>
@@ -20,14 +21,18 @@
                         <span class="posts-count"><p class="count">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></p></span>
                     </div>
                 </div>
+                  </a>
                 <% if post.comments.any? %>
                 <div class="posts-comment">
-                    <% post.comments.each do |comment| %>
+                    <% post.five_most_recent_comments.each do |comment| %>
                         <p class="comments"><%= comment.author.name %> : <%= comment.text %></p>
                     <% end %>
                 </div>
             <% end %>
         </div>
         <% end %>
+        <div class="paginate">
+        <%= will_paginate @posts %>
+        </div>
     </div>
 </main>
