@@ -16,4 +16,9 @@
             </a>
         <% end %>
     </div>
+    <div id="sign_out">
+        <% if user_signed_in? %>
+        <%= button_to "Sign out", destroy_user_session_path, :method => :delete %>
+        <% end %>
+    </div>
 </main>
