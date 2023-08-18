@@ -31,8 +31,10 @@
             <%end%>
         </div>
         <div class="create_post">
+            <% if @user.id == current_user.id%>
         <%= link_to 'create new post', new_user_post_path(@user), class: "new-post" %>
         </div>
+        <%end%>
         <div class="see-all">
             <button id="all" class="all"><%= link_to 'see all posts', user_posts_path(@user) %></button>
         </div>
