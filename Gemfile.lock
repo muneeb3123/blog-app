@@ -123,6 +123,7 @@ GEM
       activesupport (>= 5.0.0)
     json (2.6.3)
     jsonapi-renderer (0.2.2)
+    jwt (2.7.1)
     language_server-protocol (3.17.0.3)
     launchy (2.5.2)
       addressable (~> 2.8)
@@ -298,6 +299,7 @@ DEPENDENCIES
   devise
   importmap-rails
   jbuilder
+  jwt
   letter_opener
   pg (~> 1.1)
   puma (~> 5.0)
