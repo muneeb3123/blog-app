@@ -32,7 +32,6 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to user_posts_path(@user), notice: 'Post was successfully deleted.'
   end
-  
 
   private
 
