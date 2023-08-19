@@ -130,6 +130,10 @@ To deploy the project locally, run the following command:
 - Twitter: [@Hafizabd4](https://twitter.com/Hafizabd4)
 - LinkedIn: (https://www.linkedin.com/in/muneeb-rehman-01b6bb193/)
 
+👤 **Larry Villegas**
+- GitHub: [@LarryIVC](https://github.com/LarryIVC)
+- Twitter: [@LarryVillegas](https://twitter.com/LarryVillegas)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/larryvillegascostas/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
