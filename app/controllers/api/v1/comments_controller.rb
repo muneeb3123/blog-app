@@ -1,16 +1,12 @@
-module Api
-  module V1
-    class CommentsController < ApplicationController
-      skip_before_action :verify_authenticity_token, only: [:create]
+    class Api::V1::CommentsController < ApplicationController
 
-      before_action :authenticate_user!
-      before_action :set_comment, only: %i[show update destroy]
+      load_and_authorize_resource
 
       # GET /comments
       def index
-        post = Post.find(params[:post_id])
+        @user = Post.find(params[:id])
+        post = @user.posts.find(params[:post_id])
         @comments = post.comments
-        # @comments = Comment.all
 
         render json: @comments
       end
@@ -19,27 +15,22 @@ module Api
       def create
         post = Post.find(params[:post_id])
         @comment = post.comments.new(comment_params)
-        # @comment = Comment.new(comment_params)
+
+        # authorize! :create, @comment
+
         @comment.user = current_user
 
         if @comment.save
-          render json: @comment, status: :created, location: @comment
+          render json: { success: 'Comment added!' }
         else
-          render json: @comment.errors, status: :unprocessable_entity
+          render json: { error: new_comment.errors.full_messages.join(', ') }
         end
       end
 
       private
 
-      # Use callbacks to share common setup or constraints between actions.
-      def set_comment
-        @comment = Comment.find(params[:id])
-      end
-
       # Only allow a list of trusted parameters through.
       def comment_params
         params.require(:comment).permit(:content)
-      end
-    end
   end
 end
