@@ -3,9 +3,9 @@ class Api::V1::CommentsController < ApplicationController
 
   # GET /comments
   def index
-    @user = Post.find(params[:id])
-    post = @user.posts.find(params[:post_id])
-    @comments = post.comments
+    @user = User.find(params[:user_id])
+    @post = @user.posts.find(params[:post_id])
+    @comments = @post.comments
 
     render json: @comments
   end

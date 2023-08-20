@@ -1,0 +1,144 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+  description: API V1 for a blooging application
+paths:
+  "/api/v1/users/{user_id}/posts/{post_id}/comments":
+    parameters:
+    - name: user_id
+      in: path
+      description: ID for user
+      required: true
+      schema:
+        type: string
+    - name: post_id
+      in: path
+      description: ID for post
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list comments for post
+      parameters:
+      - name: user_id
+        in: path
+        description: ID for user
+        required: true
+        schema:
+          type: string
+      - name: post_id
+        in: path
+        description: ID for post
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                  - id: 1
+                    author_id: 1
+                    post_id: 1
+                    text: Comment 1
+                    created_at: '2021-01-01 00:00:00'
+                    updated_at: '2021-01-01 00:00:00'
+                  - id: 2
+                    author_id: 1
+                    post_id: 1
+                    text: Comment 2
+                    created_at: '2021-01-01 00:00:00'
+                    updated_at: '2021-01-01 00:00:00'
+        '404':
+          description: not found
+        '401':
+          description: unauthorized
+        '403':
+          description: forbidden
+        '500':
+          description: internal server error
+    post:
+      summary: Create comment
+      parameters:
+      - name: user_id
+        in: path
+        description: ID for user
+        required: true
+        schema:
+          type: string
+      - name: post_id
+        in: path
+        description: ID for post
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: comment created
+        '422':
+          description: invalid request
+        '401':
+          description: unauthorized
+        '403':
+          description: forbidden
+        '500':
+          description: internal server error
+  "/api/v1/users/{user_id}/posts":
+    parameters:
+    - name: user_id
+      in: path
+      description: user_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list posts
+      parameters:
+      - name: user_id
+        in: path
+        description: Id of user
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                  - id: 1
+                    author_id: 1
+                    title: Post 1
+                    text: Text 1
+                    comments_counter: 2
+                    likes_counter: 3
+                    created_at: '2021-01-01 00:00:00'
+                    updated_at: '2021-01-01 00:00:00'
+                  - id: 2
+                    author_id: 1
+                    title: Post 2
+                    text: Text 2
+                    comments_counter: 1
+                    likes_counter: 0
+                    created_at: '2021-01-01 00:00:00'
+                    updated_at: '2021-01-01 00:00:00'
+        '404':
+          description: Failed to fetch
+        '401':
+          description: unauthorized
+        '403':
+          description: forbidden
+        '500':
+          description: internal server error
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
