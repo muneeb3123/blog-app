@@ -1,5 +1,4 @@
 class Api::V1::PostsController < ApplicationController
-
   # GET /posts
   def index
     @user = User.find(params[:user_id])
