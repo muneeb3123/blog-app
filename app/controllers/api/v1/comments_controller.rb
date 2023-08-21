@@ -1,10 +1,10 @@
 class Api::V1::CommentsController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   # GET /comments
   def index
-    @user = Post.find(params[:id])
-    post = @user.posts.find(params[:post_id])
+    @user = current_user
+    post = Post.find(params[:post_id])
     @comments = post.comments
 
     render json: @comments
